@@ -1,0 +1,303 @@
+{
+  "intents": [
+    {
+      "intent": "guidance",
+      "examples": [
+        {
+          "text": "Where can I find the administration office?"
+        },
+        {
+          "text": "Where is the bathroom?"
+        },
+        {
+          "text": "Where is the women's hall?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "hello",
+      "examples": [
+        {
+          "text": "aslam alcom"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "robot"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "thank",
+      "examples": [
+        {
+          "text": "thank u"
+        },
+        {
+          "text": "thanx"
+        },
+        {
+          "text": "thanx alot"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "trends",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "forward",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "left",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "right",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "Welcome",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1626096675789",
+      "context": {
+        "trends_right": "@trends:right"
+      },
+      "conditions": "@trends:right",
+      "event_name": "input",
+      "dialog_node": "handler_1_1626096675790"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_3_1626096475794",
+      "event_name": "focus",
+      "dialog_node": "handler_2_1626096475808",
+      "previous_sibling": "handler_6_1626096475808"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_9_1626096747287",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1626096747288",
+      "previous_sibling": "handler_6_1626096747288"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1626096675789",
+      "event_name": "focus",
+      "dialog_node": "handler_4_1626096675790",
+      "previous_sibling": "handler_1_1626096675790"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_3_1626096475794",
+      "context": {
+        "trends_left": "@trends:left"
+      },
+      "conditions": "@trends:left",
+      "event_name": "input",
+      "dialog_node": "handler_6_1626096475808"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_9_1626096747287",
+      "context": {
+        "trends_forward": "@trends:forward"
+      },
+      "conditions": "@trends:forward",
+      "event_name": "input",
+      "dialog_node": "handler_6_1626096747288"
+    },
+    {
+      "type": "standard",
+      "title": "thank",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "you are welcome"
+              },
+              {
+                "text": "My pleasure"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#thank",
+      "dialog_node": "node_10_1626097007829"
+    },
+    {
+      "type": "standard",
+      "title": "trends",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Go to the left"
+              },
+              {
+                "text": "Turn left"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@trends:left",
+      "dialog_node": "node_6_1626095944827",
+      "previous_sibling": "node_9_1626096432132"
+    },
+    {
+      "type": "frame",
+      "title": "guidance",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "go to the left"
+              },
+              {
+                "text": "find it in front of you"
+              },
+              {
+                "text": "Turn right and you will see it"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#guidance",
+      "dialog_node": "node_9_1626096432132",
+      "previous_sibling": "node_10_1626097007829"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1626096432132",
+      "variable": "$trends_left",
+      "dialog_node": "slot_3_1626096475794"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1626096432132",
+      "variable": "$trends_right",
+      "dialog_node": "slot_7_1626096675789",
+      "previous_sibling": "slot_3_1626096475794"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1626096432132",
+      "variable": "$trends_forward",
+      "dialog_node": "slot_9_1626096747287",
+      "previous_sibling": "slot_7_1626096675789"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi. How can I help u?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#hello",
+      "dialog_node": "Welcome",
+      "previous_sibling": "node_6_1626095944827"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "speek",
+  "language": "en",
+  "description": ""
+}
